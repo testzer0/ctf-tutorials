@@ -18,8 +18,8 @@ key: authentication00001
 In this section, we'll look at some of the most common authentication mechanisms used by websites and discuss potential vulnerabilities in them.
 
 ## What is authentication?
-Authentication is the process of verifying the identity of a given user or client.
-  There are three authentication factors into which different types of authentication can be categorized: 
+Authentication is the process of verifying the identity of a given user or client.  
+There are three authentication factors into which different types of authentication can be categorized: 
 * Something you know, such as a password.
 * Something you have, that is, a physical object like a mobile phone or security token.
 * Something you are or do, for example, your biometrics or patterns of behavior.
@@ -32,8 +32,8 @@ Authentication is the process of verifying that a user really is who they claim 
 * Logic flaws or poor coding in the implementation allow the authentication mechanisms to be bypassed entirely by an attacker. This is sometimes referred to as "broken authentication". 
 
 ## What is the impact of vulnerable authentication?
-The impact of authentication vulnerabilities can be very severe. Once an attacker has either bypassed authentication or has brute-forced their way into another user's account, they have access to all the data and functionality that the compromised account has. If they are able to compromise a high-privileged account, such as a system administrator, they could take full control over the entire application and potentially gain access to internal infrastructure. 
-  Authentication based vulnerabilities can be broadly classified into three categories-
+The impact of authentication vulnerabilities can be very severe. Once an attacker has either bypassed authentication or has brute-forced their way into another user's account, they have access to all the data and functionality that the compromised account has. If they are able to compromise a high-privileged account, such as a system administrator, they could take full control over the entire application and potentially gain access to internal infrastructure.  
+Authentication based vulnerabilities can be broadly classified into three categories-
 * Password based vulnerabilities
 * Multi factor authentication based vulnerabilities
 * Vulnerabilities in other authentication mechanisms
@@ -56,40 +56,36 @@ Passwords can similarly be brute-forced, with the difficulty varying based on th
 
 ### Username enumeration
 Username enumeration is when an attacker is able to observe changes in the website's behavior in order to
-identify whether a given username is valid.
-  While attempting to brute-force a login page to find out the username, you should pay particular attention to any differences in:
-
+identify whether a given username is valid.   
+While attempting to brute-force a login page to find out the username, you should pay particular attention to any differences in:  
 * **Status codes**: During a brute-force attack, the returned HTTP status code is likely to be the same for the vast majority of guesses because most of them will be wrong. If a guess returns a different status code, this is a strong indication that the username was correct. It is best practice for websites to always return the same status code regardless of the outcome, but this practice is not always followed.
 * **Error messages**: Sometimes the returned error message is different depending on whether both the username AND password are incorrect or only the password was incorrect. It is best practice for websites to use identical, generic messages in both cases, but small typing errors sometimes creep in.
 * **Response times**: If most of the requests were handled with a similar response time, any that deviate from this suggest that something different was happening behind the scenes. This is another indication that the guessed username might be correct. For example, a website might only check whether the password is correct if the username is valid. This extra step might cause a slight increase in the response time. This may be subtle, but an attacker can make this delay more obvious by entering an excessively long password that the website takes noticeably longer to handle.
 
 ## Flawed brute-force protection
-Many websites adopt measures to prevent brute force attacks. The two most common ways of preventing brute-force attacks are: 
+Many websites adopt measures to prevent brute force attacks. The two most common ways of preventing brute-force attacks are:  
 * Locking the account that the remote user is trying to access if they make too many failed login attempts.
 * Blocking the remote user's IP address if they make too many login attempts in quick succession.
   Both approaches offer varying degrees of protection, but neither is invulnerable, especially if implemented using flawed logic.
   For example, you might sometimes find that your IP is blocked if you fail to log in too many times. In some implementations, the counter for the number of failed attempts resets if the IP owner logs in successfully. This means an attacker would simply have to log in to their own account every few attempts to prevent this limit from ever being reached.
  
 ### Account locking
-One way in which websites try to prevent brute-forcing is to lock the account if certain suspicious criteria are met, usually a set number of failed login attempts. Just as with normal login errors, responses from the server indicating that an account is locked can also help an attacker to enumerate usernames. 
-
-The following method can be used to work around this kind of protection:
-
+One way in which websites try to prevent brute-forcing is to lock the account if certain suspicious criteria are met, usually a set number of failed login attempts. Just as with normal login errors, responses from the server indicating that an account is locked can also help an attacker to enumerate usernames.  
+The following method can be used to work around this kind of protection:  
 * Establish a list of candidate usernames that are likely to be valid. This could be through username enumeration or simply based on a list of common usernames. 
 * Decide on a very small shortlist of passwords that you think at least one user is likely to have. Crucially, the number of passwords you select must not exceed the number of login attempts allowed. For example, if you have worked out that limit is 3 attempts, you need to pick a maximum of 3 password guesses. 
 * Using a tool such as Burp Intruder, try each of the selected passwords with each of the candidate usernames. This way, you can attempt to brute-force every account without triggering the account lock. You only need a single user to use one of the three passwords in order to compromise an account.
 
 ### User rate limiting
-Another way websites try to prevent brute-force attacks is through user rate limiting. In this case, making too many login requests within a short period of time causes your IP address to be blocked. Typically, the IP can only be unblocked in one of the following ways:
-
+Another way websites try to prevent brute-force attacks is through user rate limiting. In this case, making too many login requests within a short period of time causes your IP address to be blocked. Typically, the IP can only be unblocked in one of the following ways:  
 * Automatically after a certain period of time has elapsed
 * Manually by an administrator
 * Manually by the user after successfully completing a CAPTCHA
   User rate limiting is sometimes preferred to account locking due to being less prone to username enumeration and denial of service attacks. However, it is still not completely secure. There are several ways an attacker can manipulate their apparent IP in order to bypass the block. 
 
 # Vulnerabilities in multi-factor authentication
-In this section, we'll look at some of the vulnerabilities that can occur in multi-factor authentication mechanisms. The details are a bit more involved, so we won't be touching them. If you wish to learn more about it, please refer to [here](https://portswigger.net/web-security/authentication/multi-factor).
-  Many websites rely exclusively on single-factor authentication using a password to authenticate users. However, some require users to prove their identity using multiple authentication factors- which is usually *something you know* and *something you have*. This usually requires users to enter both a traditional password and a temporary verification code from an out-of-band physical device in their possession. 
+In this section, we'll look at some of the vulnerabilities that can occur in multi-factor authentication mechanisms. The details are a bit more involved, so we won't be touching them. If you wish to learn more about it, please refer to [here](https://portswigger.net/web-security/authentication/multi-factor).  
+Many websites rely exclusively on single-factor authentication using a password to authenticate users. However, some require users to prove their identity using multiple authentication factors- which is usually *something you know* and *something you have*. This usually requires users to enter both a traditional password and a temporary verification code from an out-of-band physical device in their possession. 
 
 The major vulnerabilities in Two-factor authentication are:
 ## Transmitting tokens through SMS
@@ -105,10 +101,8 @@ As with passwords, websites need to take steps to prevent brute-forcing of the 2
 In addition to the basic login functionality, most websites provide supplementary functionality to allow users to manage their account. For example, users can typically change their password or reset their password when they forget it. These mechanisms can also introduce vulnerabilities that can be exploited by an attacker. 
 
 ## Keeping users logged in
-A common feature is the option to stay logged in even after closing a browser session. This is usually a simple checkbox labeled something like "Remember me" or "Keep me logged in".
-
-This functionality is often implemented by generating a "remember me" token of some kind, which is then stored in a persistent cookie. As possessing this cookie effectively allows you to bypass the entire login process, it is best practice for this cookie to be impractical to guess. However, some websites generate this cookie based on a predictable concatenation of static values, such as the username and a timestamp. Some even use the password as part of the cookie. This approach is particularly dangerous if an attacker is able to create their own account because they can study their own cookie and potentially deduce how it is generated. Once they work out the formula, they can try to brute-force other users' cookies to gain access to their accounts. 
-
+A common feature is the option to stay logged in even after closing a browser session. This is usually a simple checkbox labeled something like "Remember me" or "Keep me logged in".  
+This functionality is often implemented by generating a "remember me" token of some kind, which is then stored in a persistent cookie. As possessing this cookie effectively allows you to bypass the entire login process, it is best practice for this cookie to be impractical to guess. However, some websites generate this cookie based on a predictable concatenation of static values, such as the username and a timestamp. Some even use the password as part of the cookie. This approach is particularly dangerous if an attacker is able to create their own account because they can study their own cookie and potentially deduce how it is generated. Once they work out the formula, they can try to brute-force other users' cookies to gain access to their accounts.  
 Even if the attacker is not able to create their own account, they may still be able to exploit this vulnerability. Using the usual techniques, such as XSS, an attacker could steal another user's "remember me" cookie and deduce how the cookie is constructed from that. If the website was built using an open-source framework, the key details of the cookie construction may even be publicly documented.
 
 ## Resetting user passwords
