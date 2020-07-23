@@ -43,11 +43,11 @@ To get hands on experience with this task, you can try [this](https://portswigge
 #### Modifying object types
 PHP based applications are particularly vulnerable to these kind of vulnerabilities, due to presence of a loose comparison operator `==`.
 <br>
-What this means is that in PHP if we evaluate the statement `5=="5"`, it evaluates to true and so does `5 == "5 of something"`. However, if there is no number in the string's start, it is evaluated as `0`. So `0=="any string"` would evaluate `true` in PHP.
-
+What this means is that in PHP if we evaluate the statement `5=="5"`, it evaluates to true and so does `5 == "5 of something"`. However, if there is no number in the string's start, it is evaluated as `0`. So `0=="any string"` would evaluate `true` in PHP.  
 So what this means is that if the attacker modifies the serialized object to contain password as an integer and set its value to `0`, he can potentially login to any acount in the system!
 
 To get a hands on experience with this task, you can try [this](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-modifying-serialized-data-types) lab.
 
 So this was a basic overview of attacks related to insecure deserialization. If you wish to read more, you might like to [this](https://portswigger.net/web-security/deserialization) check out.
+{:.info}
 
