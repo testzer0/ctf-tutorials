@@ -13,7 +13,7 @@ chart: false
 excerpt_separator: <!--more-->
 key: srlz00001
 ---
-### What is serialization and deserialization?
+# What is serialization and deserialization?
 "Serialization is the process of converting complex data structures, such as objects and their fields, into a 'flatter' format that can be sent and received as a sequential stream of bytes." Let's explain this with an example.
 Suppose this is our user object,<br>
 `$user->name = "carlos";` <br>
@@ -31,16 +31,16 @@ This can be interpreted as follows:
 
 Deserialization refers to reversing the serialization on the server side to get back the object that was initially created on the client side.
 
-### Why can it be harmful?
+## Why can it be harmful?
 
-#### Modifying object attributes
+### Modifying object attributes
 Suppose the serialized object is as follows `O:4:"User":2:{s:8:"username":s:6:"carlos"; s:7:"isAdmin":b:0;}`.
 If the attacker modifies the `isAdmin` field in the serialized data and change it to `1`, he can gain access to confidential information and priviledges.
 <br>
 
 To get hands on experience with this task, you can try [this](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-modifying-serialized-objects) lab on portswigger.
 
-#### Modifying object types
+### Modifying object types
 PHP based applications are particularly vulnerable to these kind of vulnerabilities, due to presence of a loose comparison operator `==`.
 <br>
 What this means is that in PHP if we evaluate the statement `5=="5"`, it evaluates to true and so does `5 == "5 of something"`. However, if there is no number in the string's start, it is evaluated as `0`. So `0=="any string"` would evaluate `true` in PHP.  
