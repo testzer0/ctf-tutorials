@@ -19,8 +19,7 @@ In this section, we'll look at some of the most common authentication mechanisms
 
 ## What is authentication?
 Authentication is the process of verifying the identity of a given user or client.
-
-There are three authentication factors into which different types of authentication can be categorized: 
+  There are three authentication factors into which different types of authentication can be categorized: 
 * Something you know, such as a password.
 * Something you have, that is, a physical object like a mobile phone or security token.
 * Something you are or do, for example, your biometrics or patterns of behavior.
@@ -57,7 +56,7 @@ Passwords can similarly be brute-forced, with the difficulty varying based on th
 
 ### Username enumeration
 Username enumeration is when an attacker is able to observe changes in the website's behavior in order to
-identify whether a given username is valid. 
+identify whether a given username is valid.
   While attempting to brute-force a login page to find out the username, you should pay particular attention to any differences in:
 
 * **Status codes**: During a brute-force attack, the returned HTTP status code is likely to be the same for the vast majority of guesses because most of them will be wrong. If a guess returns a different status code, this is a strong indication that the username was correct. It is best practice for websites to always return the same status code regardless of the outcome, but this practice is not always followed.
@@ -107,8 +106,10 @@ In addition to the basic login functionality, most websites provide supplementar
 
 ## Keeping users logged in
 A common feature is the option to stay logged in even after closing a browser session. This is usually a simple checkbox labeled something like "Remember me" or "Keep me logged in".
-  This functionality is often implemented by generating a "remember me" token of some kind, which is then stored in a persistent cookie. As possessing this cookie effectively allows you to bypass the entire login process, it is best practice for this cookie to be impractical to guess. However, some websites generate this cookie based on a predictable concatenation of static values, such as the username and a timestamp. Some even use the password as part of the cookie. This approach is particularly dangerous if an attacker is able to create their own account because they can study their own cookie and potentially deduce how it is generated. Once they work out the formula, they can try to brute-force other users' cookies to gain access to their accounts. 
-  Even if the attacker is not able to create their own account, they may still be able to exploit this vulnerability. Using the usual techniques, such as XSS, an attacker could steal another user's "remember me" cookie and deduce how the cookie is constructed from that. If the website was built using an open-source framework, the key details of the cookie construction may even be publicly documented.
+
+This functionality is often implemented by generating a "remember me" token of some kind, which is then stored in a persistent cookie. As possessing this cookie effectively allows you to bypass the entire login process, it is best practice for this cookie to be impractical to guess. However, some websites generate this cookie based on a predictable concatenation of static values, such as the username and a timestamp. Some even use the password as part of the cookie. This approach is particularly dangerous if an attacker is able to create their own account because they can study their own cookie and potentially deduce how it is generated. Once they work out the formula, they can try to brute-force other users' cookies to gain access to their accounts. 
+
+Even if the attacker is not able to create their own account, they may still be able to exploit this vulnerability. Using the usual techniques, such as XSS, an attacker could steal another user's "remember me" cookie and deduce how the cookie is constructed from that. If the website was built using an open-source framework, the key details of the cookie construction may even be publicly documented.
 
 ## Resetting user passwords
 In practice, it is a given that some users will forget their password, so it is common to have a way for them to reset it. As now the users cannot be authenticated using their passwords, this feature needs to be implemented very securely.
