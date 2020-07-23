@@ -63,8 +63,7 @@ Many modern web developers use components such as libraries and frameworks in th
 Many web applications are not taking enough steps to detect data breaches. The average discovery time for a breach is around 200 days after it has happened. This gives attackers a lot of time to cause damage before there is any response. OWASP recommends that web developers should implement logging and monitoring as well as incident response plans to ensure that they are made aware of attacks on their applications.
 
 ## Tools required
-For exploiting vulnerabilities in web applications, we'll be requiring some tools, an important one being Burp Suite, which is a Java based Web Penetration Testing framework. It is a very powerful tool and used for professional purposes as well. You can download it from [here](https://portswigger.net/burp/communitydownload). To get a basic overview of what Burp Suite is, you might like to [read](https://www.geeksforgeeks.org/what-is-burp-suite/) or [watch](https://www.youtube.com/watch?v=70hvwmwfZeM). 
-
+For exploiting vulnerabilities in web applications, we'll be requiring some tools, an important one being Burp Suite, which is a Java based Web Penetration Testing framework. It is a very powerful tool and used for professional purposes as well. You can download it from [here](https://portswigger.net/burp/communitydownload). To get a basic overview of what Burp Suite is, you might like to [read](https://www.geeksforgeeks.org/what-is-burp-suite/) or [watch](https://www.youtube.com/watch?v=70hvwmwfZeM).<br>
 Also, if you are using Burp Suite for the first time, do watch [this video](https://www.youtube.com/watch?v=YCCrVtvAu2I) to get an idea of how the proxy (which is the main feature of burp that we'll be using extensively) works.
 
 
